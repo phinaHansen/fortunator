@@ -1,0 +1,272 @@
+<html>
+<head>
+	<script type="text/javascript">
+		matcher=/\{[^\}\\]*\}/;
+
+		function pick(corpus, tag) {
+			//console.log("tag:" + tag);		//DEBUG
+			if (! corpus[tag])
+				return tag;
+			var item = corpus[tag][Math.floor(Math.random()*corpus[tag].length)];
+			//console.log("item:" + item);		//DEBUG
+
+			var match;
+			while (match = item.match(matcher)) {
+				//console.log("match:" + match[0]);		//DEBUG
+				var subtag = match[0].slice(1,-1); // strip brackets
+				//console.log("sub:" + subtag);		//DEBUG
+				item = item.replace(match[0], pick(corpus, subtag));
+			}
+
+			return item;
+		}
+
+		// https://stackoverflow.com/questions/14446447/how-to-read-a-local-text-file
+		function readTextFile(file)
+		{
+				var rawFile = new XMLHttpRequest();
+				rawFile.open("GET", file, false);
+				rawFile.onreadystatechange = function ()
+				{
+						if(rawFile.readyState === 4)
+						{
+								if(rawFile.status === 200 || rawFile.status == 0)
+								{
+										var allText = rawFile.responseText;
+										alert(allText);
+								}
+						}
+				}
+				rawFile.send(null);
+		}
+
+		corpus = {};
+
+// https://stackoverflow.com/questions/805107/creating-multiline-strings-in-javascript
+// this is a gross hack I wouldn't use if i wasn't writing this for older browsers,
+// but it should make this file easier for phina to edit. -m-
+
+	function hereDoc(f) {
+  return f.toString().
+      replace(/^[^\/]+\/\*!?/, '').
+      replace(/\*\/[^\/]+$/, '');
+	}
+
+	prompts = hereDoc(function() {/*!
+Follow your heart to find {NOUN}
+{NOUN} will guide you through the storm
+A natural disaster will hit {NOUN}
+Aliens will visit Earth and trade us {NOUN}
+Competition will lead to {NOUN}
+Girls do not like {NOUN} but they do like {NOUN}
+Hopefully {NOUN} is not too important to you because it will go away
+How does {NOUN} make you feel? Trust this intuition
+I am unsure if {NOUN} investment is a good idea
+I hope you don’t think that I am immortal, because my gears will rust the same as {NOUN} will mold and {NOUN} evaporate
+I see in my crystal ball a future of {NOUN}
+I watched as {NOUN} collapsed and I will watch again
+If you are running a business {NOUN} is the answer but avoid {NOUN} in the coming months
+In the blurry vision of a ghost lost in time there appears a large quantity {NOUN}, do you trust it?
+It is dangerous to be near {NOUN}
+It is not clear whether this is good of bad news, but you will receive {NOUN}
+Many more people will live their lives in virtual worlds
+Nuclear weapons will be linked to {NOUN}
+People in my country will become more tolerant of {NOUN}
+People will have less {NOUN} than they did last year
+Strict rules for {NOUN} will be introduced by the Government in my country
+The Future of {NOUN} seems likely
+The following things will change their position in your life {NOUN}, {NOUN} and {NOUN}.
+The labor market will be saved by {NOUN}
+The outcome of {NOUN} seems unfortunate
+There are good things coming your way. Bad things as well but {NOUN} is neither
+There are {NOUN} hiding in vast amounts somewhere
+There is something in {NOUN} that will help you
+There will be more {NOUN} in my country in the next year
+There will be {NOUN} following you
+We expect prices of {NOUN} in our countries to increase faster than our incomes
+What you are looking for is less {NOUN}
+What you are looking for is more {NOUN}
+When will you ever stop thinking about {NOUN}?
+You will find quiet contemplative solitude in {NOUN}
+all in all you will live a happy life and the times of pain will bring you perspective, except for {NOUN}, that will only bring misery
+anger will consume your {NOUN}
+beyond the walls of your perception lies mountains of {NOUN} and seas of {NOUN}
+burn your idols and plant {NOUN} on the scorched earth
+certain events will effect {NOUN} in relation to {NOUN}
+creation is destruction, such as {NOUN} is {NOUN}
+crows will gather around {NOUN} and will they are distracted steal the {NOUN}
+currently there are no foreseen optimal paths out of {NOUN} failure
+expect to see stock markets and {NOUN} prices around the world crashing
+find was to exploit your free time and will it with {NOUN}
+hunger will force you to return to {NOUN}
+hyper growth will not disturb your {NOUN}
+if you don’t trust yourself then {NOUN} will never trust you
+if you listen to the wind it will tell you to buy {NOUN}
+if you love {NOUN} then you will be rewarded
+if you never try {NOUN} you will never know {NOUN}
+in the end there will only be {NOUN}
+now matter how much {NOUN} you have it will not stop you from dying.
+one day, you will realize that only {NOUN} was meant to be, everything else will fall into the abyss of time
+our future is unimaginable because we have already imagined it. {NOUN} will be what we have never thought of
+peace will find you in places of {NOUN}
+personal choices will affect your success in {NOUN}
+repetition in {NOUN} will certainly occur
+search for {NOUN} in unknown spaces
+some children wish for {NOUN}, others wish for {NOUN}, both are wrong
+someone will help you find some {NOUN} you lost along time ago
+something will end in {NOUN}, others will begin in {NOUN} find your path.
+the garden of eden is fertilized with {NOUN}
+the last thing you see before you die will be {NOUN}
+the moon will shine a path in the night towards the tides that ebb in time and just as you reach the shore you will fall to your knees and kiss the ground. Buried beneath the sand you will find a treasure chest filled to the brim with {NOUN}
+the price tag on {NOUN} is not set yet
+the rich tapestries of {NOUN} will begin to unweave
+the sky will fall on {NOUN}, and only {NOUN} will last
+the spirit of {NOUN} will visit you the next solstice
+there are certain things beyond my prediction capabilities, {NOUN} however is not outside of my vision
+there are no answers to your questions only {NOUN}
+there is a certain wisdom in {NOUN} but don’t confuse it with {NOUN}
+there is a strong will in those around you to move toward a future of {NOUN}
+there is an infinite amount of {NOUN} surrounding you at all times
+there is no way to win in {NOUN}
+there is no {NOUN} in your future
+there is no {NOUN} in your past
+there is not absolute truth, only {NOUN}
+there will be no {NOUN} in heaven
+there will be no {NOUN} in hell
+things will never be as you have experienced them before especially {NOUN}
+to attract {NOUN} one must give {NOUN}
+towers of {NOUN} will crumble while trees of {NOUN} will rise
+trust your instincts about {NOUN}
+try to change your habits concerning {NOUN}
+when dealing with {NOUN} reason in more important than feelings
+when you grow older you will realize that {NOUN} was all you needed
+you are not sure of the truth but you do know {NOUN}
+you do not have much time left, only {NOUN} will remain
+you don’t know what {NOUN} is
+you where made in the mirror image of {NOUN}
+you will find in the darkest of times {NOUN}
+you will find it difficult to trust {NOUN} but have faith
+you will never understand yourself or {NOUN}
+your friends and loved ones will help you through a hard time and {NOUN} will be the rock that steadies your hands
+{NOUN} fell behind today
+{NOUN} is the true secret to happiness
+{NOUN} will make you fall in love
+{NOUN} will not haunt you again.
+*/}).trim();
+
+	nouns = hereDoc(function() {/*!
+Crude oil
+Coffee
+Natural gas
+Gold
+Wheat
+Cotton
+Corn
+Sugar
+Silver
+Copper
+Rice
+Palm oil
+Wool
+Amber
+Rubber
+Lead
+Zinc
+Tin
+Aluminium
+Nickel
+Propane
+Cobalt
+Ethanol
+Live cattle
+Cocoa
+Milk
+Frozen concentrated Orange juice
+Oats
+Soybean oil
+Soybeans
+No 2 soybean
+Wind
+Water
+Sand
+Air
+Lakes
+Rivers
+Sky
+Land
+Earth
+Sun
+Snow
+Fire
+Ice
+Rain
+Steam
+Clouds
+acceptance
+adoration
+affection
+anticipation
+bliss
+calm
+camaraderie
+contempt
+cruelty
+denial
+depression
+desire
+despair
+disgust
+emptiness
+euphoria
+fear
+frustration
+fulfillment
+glee
+gloom
+grief
+guilt
+happiness
+hope
+humor
+hurt
+hysteria
+infatuation
+inner peace
+innocence
+insanity
+inspiration
+jealousy
+joy
+love
+lust
+melancholy
+mercy
+pain
+paranoia
+passion
+pleasure
+rage
+regret
+relief
+remorse
+shame
+sincerity
+*/}).trim();
+
+	corpus = {
+		"MAIN": prompts.split('\n'),
+		"NOUN": nouns.split('\n')
+	};
+
+
+document.onkeypress = function(event) {
+	alert(pick(corpus, "MAIN"));
+};
+
+	</script>
+</head>
+<body>
+	<img src="loading-page.jpg" \>
+</body>
+</html>
+
