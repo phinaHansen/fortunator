@@ -55,19 +55,17 @@
 				rawFile.send(null);
 		}
 
-		corpus = {};
+		// https://stackoverflow.com/questions/805107/creating-multiline-strings-in-javascript
+		// this is a gross hack I wouldn't use if i wasn't writing this for older browsers,
+		// but i hope it makes the blocks of fortune text easier to edit. -m-
 
-// https://stackoverflow.com/questions/805107/creating-multiline-strings-in-javascript
-// this is a gross hack I wouldn't use if i wasn't writing this for older browsers,
-// but i hope it makes the blocks of fortune text easier to edit. -m-
+		function hereDoc(f) {
+		return f.toString().
+				replace(/^[^\/]+\/\*!?/, '').
+				replace(/\*\/[^\/]+$/, '');
+		}
 
-	function hereDoc(f) {
-  return f.toString().
-      replace(/^[^\/]+\/\*!?/, '').
-      replace(/\*\/[^\/]+$/, '');
-	}
-
-	prompts = hereDoc(function() {/*!
+		prompts = hereDoc(function() {/*!
 Follow your heart to find {NOUN}
 {NOUN} will guide you through the storm
 A natural disaster will hit {NOUN}
@@ -169,7 +167,7 @@ your friends and loved ones will help you through a hard time and {NOUN} will be
 {NOUN} will not haunt you again.
 */}).trim();
 
-	nouns = hereDoc(function() {/*!
+		nouns = hereDoc(function() {/*!
 Crude oil
 Coffee
 Natural gas
@@ -268,20 +266,20 @@ shame
 sincerity
 */}).trim();
 
-var corpus = {
-	"MAIN": prompts.split('\n'),
-	"NOUN": nouns.split('\n')
-};
+		var corpus = {
+			"MAIN": prompts.split('\n'),
+			"NOUN": nouns.split('\n')
+		};
 
-// https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis
-var synth = window.speechSynthesis;
+		// https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis
+		var synth = window.speechSynthesis;
 
-document.onkeypress = function(event) {
-	var fortune = pick(corpus, "MAIN");
-	var utterThis = new SpeechSynthesisUtterance(fortune);
-	synth.speak(utterThis);
-	alert(fortune);
-};
+		document.onkeypress = function(event) {
+			var fortune = pick(corpus, "MAIN");
+			var utterThis = new SpeechSynthesisUtterance(fortune);
+			synth.speak(utterThis);
+			alert(fortune);
+		};
 
 	</script>
 </head>
