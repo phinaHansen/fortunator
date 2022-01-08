@@ -1,20 +1,5 @@
 <html>
 <head>
-	<style>
-		<!-- https://www.w3schools.com/css/css_howto.asp -->
-		body, html {
-			height: 100%;
-		}
-
-		.bg {
-			background-image: url("loading-page.jpg");
-			height: 100%;
-			/* Center and scale the image nicely */
-			background-position: center;
-			background-repeat: no-repeat;
-			background-size: cover;
-		}
-	</style>
 	<script type="text/javascript">
 		matcher=/\{[^\}\\]*\}/;
 
@@ -282,10 +267,58 @@ sincerity
 		};
 
 	</script>
+	<style>
+		<!-- https://www.w3schools.com/css/css_howto.asp -->
+
+		@font-face {
+			font-family: "Tamil Sangam";
+			src:  local("Tamil Sangam MN"),
+						local("TamilSangam-MN"),
+						local("Arial Black"),
+						local("Arial"),
+						local("Helvetica"),
+		}
+
+		body, html {
+			height: 100%;
+		}
+
+		.bg {
+			background-image: url("loading-page-notext.jpg");
+			/* background-image: url("loading-page.jpg"); */
+			height: 100%;
+			/* Center and scale the image nicely */
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+
+		.txt {
+			/* font-family: "Tamil Sangam"; */
+			font-family: "Arial Narrow",Arial,Helvetica,sans-serif;
+			padding-top: 9%;
+			text-align: center;
+			font-size: 6em;
+			-webkit-text-stroke: 0.03em white;
+		}
+
+		.press_space {
+			font-size: 6vw;
+		}
+
+		.fortune {
+			font-size: 4vw;
+		}
+
+	</style>
 </head>
 <body>
 	<!-- <img src="loading-page.jpg" \> -->
 	<div class="bg" />
+	<h1 class="txt press_space"> 
+		Press space for a reading
+	</div>
+	<p class="txt fortune" />
 </body>
 </html>
 
