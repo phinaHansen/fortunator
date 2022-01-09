@@ -247,30 +247,34 @@ sincerity
 		var synth = window.speechSynthesis;
 
 		document.onkeypress = function(event) {
-			els = {
-				fortune: document.getElementById("fortune"),
-				intro: document.getElementById("intro"),
-			};
+			if (! synth.speaking) { 
 
-			var fortune = capitalizeFirstLetter(pick(corpus, "MAIN"));
-			// hide intro
-			els.intro.style.display = "none";
-			// show fortune
-			els.fortune.innerHTML = fortune;
-			els.fortune.style.display = "block";
+				els = {
+					fortune: document.getElementById("fortune"),
+					intro: document.getElementById("intro"),
+				};
 
-			var hide = function(event) { 
-				// hide fortune
-				els.fortune.style.display = "none";
-				// show intro
-				els.intro.style.display = "block";
-				// flush key events?
-			};
+				var fortune = capitalizeFirstLetter(pick(corpus, "MAIN"));
+				// hide intro
+				els.intro.style.display = "none";
+				// show fortune
+				els.fortune.innerHTML = fortune;
+				els.fortune.style.display = "block";
 
-			var utterThis = new SpeechSynthesisUtterance(fortune);
-			utterThis.addEventListener('end', hide);
-			utterThis.addEventListener('error', hide);
-			synth.speak(utterThis);
+				var hide = function(event) { 
+					// hide fortune
+					els.fortune.style.display = "none";
+					// show intro
+					els.intro.style.display = "block";
+					// flush key events?
+				};
+
+				var utterThis = new SpeechSynthesisUtterance(fortune);
+				utterThis.addEventListener('end', hide);
+				utterThis.addEventListener('error', hide);
+				synth.speak(utterThis);
+
+			}
 		};
 
 	</script>
