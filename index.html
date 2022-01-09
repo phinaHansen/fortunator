@@ -52,7 +52,7 @@ I watched as {NOUN} collapsed and I will watch again
 If you are running a business {NOUN} is the answer but avoid {NOUN} in the coming months
 In the blurry vision of a ghost lost in time there appears a large quantity of {NOUN}. Do you trust it?
 It is dangerous to be near {NOUN}
-It is not clear whether this is good of bad news, but you will receive {NOUN}
+It is not clear whether this is good or bad news, but you will receive {NOUN}
 Many more people will live their lives in virtual worlds
 Nuclear weapons will be linked to {NOUN}
 People in my country will become more tolerant of {NOUN}
@@ -74,7 +74,7 @@ When will you ever stop thinking about {NOUN}?
 You will find quiet contemplative solitude in {NOUN}
 all in all you will live a happy life and the times of pain will bring you perspective, except for {NOUN}. That will only bring misery
 anger will consume your {NOUN}
-beyond the walls of your perception lies mountains of {NOUN} and seas of {NOUN}
+beyond the walls of your perception lie mountains of {NOUN} and seas of {NOUN}
 burn your idols and plant {NOUN} on the scorched earth
 certain events will effect {NOUN} in relation to {NOUN}
 creation is destruction, such as {NOUN} is {NOUN}
@@ -83,13 +83,13 @@ currently there are no foreseen optimal paths out of {NOUN} failure
 expect to see stock markets and {NOUN} prices around the world crashing
 find was to exploit your free time and will it with {NOUN}
 hunger will force you to return to {NOUN}
-hyper growth will not disturb your {NOUN}
+hypergrowth will not disturb your {NOUN}
 if you don't trust yourself then {NOUN} will never trust you
 if you listen to the wind it will tell you to buy {NOUN}
 if you love {NOUN} then you will be rewarded
 if you never try {NOUN} you will never know {NOUN}
 in the end there will only be {NOUN}
-now matter how much {NOUN} you have it will not stop you from dying.
+no matter how much {NOUN} you have it will not stop you from dying.
 one day, you will realize that only {NOUN} was meant to be, everything else will fall into the abyss of time
 our future is unimaginable because we have already imagined it. {NOUN} will be what we have never thought of
 peace will find you in places of {NOUN}
@@ -117,7 +117,7 @@ there is no {NOUN} in your past
 there is not absolute truth, only {NOUN}
 there will be no {NOUN} in heaven
 there will be no {NOUN} in hell
-things will never be as you have experienced them before especially {NOUN}
+things will never be as you have experienced them before, especially {NOUN}
 to attract {NOUN} one must give {NOUN}
 towers of {NOUN} will crumble while trees of {NOUN} will rise
 trust your instincts about {NOUN}
@@ -165,7 +165,7 @@ Ethanol
 Live cattle
 Cocoa
 Milk
-Frozen concentrated Orange juice
+Frozen Concentrated Orange Juice
 Oats
 Soybean oil
 Soybeans
@@ -247,13 +247,34 @@ sincerity
 		var synth = window.speechSynthesis;
 
 		document.onkeypress = function(event) {
+			els = {
+				fortune: document.getElementById("fortune"),
+				intro: document.getElementById("intro"),
+			};
+
 			var fortune = capitalizeFirstLetter(pick(corpus, "MAIN"));
+			// hide intro
+			els.intro.style.display = "none";
+			// show fortune
+			els.fortune.innerHTML = fortune;
+			els.fortune.style.display = "block";
+
+			var hide = function(event) { 
+				// hide fortune
+				els.fortune.style.display = "none";
+				// show intro
+				els.intro.style.display = "block";
+				// flush key events?
+			};
+
 			var utterThis = new SpeechSynthesisUtterance(fortune);
+			utterThis.addEventListener('end', hide);
+			utterThis.addEventListener('error', hide);
 			synth.speak(utterThis);
-			alert(fortune);
 		};
 
 	</script>
+	<link rel="stylesheet" href="reset.css" />
 	<style>
 		<!-- https://www.w3schools.com/css/css_howto.asp -->
 
@@ -289,13 +310,20 @@ sincerity
 			-webkit-text-stroke: 0.03em white;
 		}
 
-		.press_space {
+		.intro {
 			font-size: 6vw;
 		}
 
 		.fortune {
-			font-size: 4vw;
-			display: none;
+			font-size: 5vw;
+			font-weight: bold;
+			position: absolute;
+			top: 0;
+			text-align: center;
+			width: 80%;
+			margin-left: 10%;
+			margin-right: 10%;
+			display: none; 
 		}
 
 	</style>
@@ -303,10 +331,12 @@ sincerity
 <body>
 	<!-- <img src="loading-page.jpg" \> -->
 	<div class="bg" />
-	<h1 class="txt press_space"> 
+	<h1 id="intro" class="txt intro"> 
 		Press space for a reading
-	</div>
-	<p class="txt fortune" />
+	</h1>
+	<p id="fortune" class="txt fortune">
+		Signs point to testing
+	</p>
 </body>
 </html>
 
