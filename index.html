@@ -15,29 +15,15 @@
 				//console.log("match:" + match[0]);		//DEBUG
 				var subtag = match[0].slice(1,-1); // strip brackets
 				//console.log("sub:" + subtag);		//DEBUG
-				item = item.replace(match[0], pick(corpus, subtag));
+				item = item.replace(match[0], pick(corpus, subtag).trim());
 			}
 
 			return item;
 		}
 
-		// https://stackoverflow.com/questions/14446447/how-to-read-a-local-text-file
-		function readTextFile(file)
-		{
-				var rawFile = new XMLHttpRequest();
-				rawFile.open("GET", file, false);
-				rawFile.onreadystatechange = function ()
-				{
-						if(rawFile.readyState === 4)
-						{
-								if(rawFile.status === 200 || rawFile.status == 0)
-								{
-										var allText = rawFile.responseText;
-										alert(allText);
-								}
-						}
-				}
-				rawFile.send(null);
+		// https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript
+		function capitalizeFirstLetter(string) {
+			return string.charAt(0).toUpperCase() + string.slice(1);
 		}
 
 		// https://stackoverflow.com/questions/805107/creating-multiline-strings-in-javascript
@@ -64,7 +50,7 @@ I hope you don't think that I am immortal, because my gears will rust the same a
 I see in my crystal ball a future of {NOUN}
 I watched as {NOUN} collapsed and I will watch again
 If you are running a business {NOUN} is the answer but avoid {NOUN} in the coming months
-In the blurry vision of a ghost lost in time there appears a large quantity {NOUN}, do you trust it?
+In the blurry vision of a ghost lost in time there appears a large quantity of {NOUN}. Do you trust it?
 It is dangerous to be near {NOUN}
 It is not clear whether this is good of bad news, but you will receive {NOUN}
 Many more people will live their lives in virtual worlds
@@ -76,7 +62,7 @@ The Future of {NOUN} seems likely
 The following things will change their position in your life {NOUN}, {NOUN} and {NOUN}.
 The labor market will be saved by {NOUN}
 The outcome of {NOUN} seems unfortunate
-There are good things coming your way. Bad things as well but {NOUN} is neither
+There are good things coming your way. Bad things as well. But {NOUN} is neither.
 There are {NOUN} hiding in vast amounts somewhere
 There is something in {NOUN} that will help you
 There will be more {NOUN} in my country in the next year
@@ -86,7 +72,7 @@ What you are looking for is less {NOUN}
 What you are looking for is more {NOUN}
 When will you ever stop thinking about {NOUN}?
 You will find quiet contemplative solitude in {NOUN}
-all in all you will live a happy life and the times of pain will bring you perspective, except for {NOUN}, that will only bring misery
+all in all you will live a happy life and the times of pain will bring you perspective, except for {NOUN}. That will only bring misery
 anger will consume your {NOUN}
 beyond the walls of your perception lies mountains of {NOUN} and seas of {NOUN}
 burn your idols and plant {NOUN} on the scorched earth
@@ -111,9 +97,9 @@ personal choices will affect your success in {NOUN}
 repetition in {NOUN} will certainly occur
 search for {NOUN} in unknown spaces
 some children wish for {NOUN}, others wish for {NOUN}, both are wrong
-someone will help you find some {NOUN} you lost along time ago
-something will end in {NOUN}, others will begin in {NOUN} find your path.
-the garden of eden is fertilized with {NOUN}
+someone will help you find some {NOUN} you lost a long time ago
+something will end in {NOUN}, others will begin in {NOUN}. Find your path.
+the Garden Of Eden is fertilized with {NOUN}
 the last thing you see before you die will be {NOUN}
 the moon will shine a path in the night towards the tides that ebb in time and just as you reach the shore you will fall to your knees and kiss the ground. Buried beneath the sand you will find a treasure chest filled to the brim with {NOUN}
 the price tag on {NOUN} is not set yet
@@ -121,7 +107,7 @@ the rich tapestries of {NOUN} will begin to unweave
 the sky will fall on {NOUN}, and only {NOUN} will last
 the spirit of {NOUN} will visit you the next solstice
 there are certain things beyond my prediction capabilities, {NOUN} however is not outside of my vision
-there are no answers to your questions only {NOUN}
+there are no answers to your questions, only {NOUN}
 there is a certain wisdom in {NOUN} but don't confuse it with {NOUN}
 there is a strong will in those around you to move toward a future of {NOUN}
 there is an infinite amount of {NOUN} surrounding you at all times
@@ -183,7 +169,7 @@ Frozen concentrated Orange juice
 Oats
 Soybean oil
 Soybeans
-No 2 soybean
+No 2 Soybean
 Wind
 Water
 Sand
@@ -200,6 +186,7 @@ Ice
 Rain
 Steam
 Clouds
+NFTs
 acceptance
 adoration
 affection
@@ -260,7 +247,7 @@ sincerity
 		var synth = window.speechSynthesis;
 
 		document.onkeypress = function(event) {
-			var fortune = pick(corpus, "MAIN");
+			var fortune = capitalizeFirstLetter(pick(corpus, "MAIN"));
 			var utterThis = new SpeechSynthesisUtterance(fortune);
 			synth.speak(utterThis);
 			alert(fortune);
